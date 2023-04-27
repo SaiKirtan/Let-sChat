@@ -11,12 +11,37 @@ var firebaseConfig = {
     
     // Initialize Firebase
     var app = firebase.initializeApp(firebaseConfig);
+
+    username = localStorage.getItem("username");
+
+    document.getElementById("username").innerHTML = "Welcome "+ username + "!";
 //ADD YOUR FIREBASE LINKS HERE
 
-function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
+function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey = childSnapshot.key;
       Room_names = childKey;
-      //Start code
+//Start code
+      row = "<div class='room_name' id=" + Room_names +" onclick='redirectToRoomName(this.id)'>#" + Room_names + "</div><hr>";
+//End code
+});});}
+getData(); 
 
-      //End code
-     });});}
-getData();
+roomname = document.getElementById("addRoom").innerHTML
+
+function addRoom() {
+
+      username = document.getElementById('addRoom').value;
+      localStorage.setItem('addRoom', addRoomname);
+  
+      window.location = "kwitter_room.html";
+      
+  
+  }
+function redirectToRoomName(){
+
+      localStorage.setItem("roomname", roomname);
+
+
+      
+
+      window.location = "kwitter_room.html";
+}
